@@ -1,14 +1,10 @@
-setTimeout(() => console.log("Hello"), 1000);
+let input = "  JavaScript  ";
+let output = "<div>" + input.trim() + "</div>";
 
-let numbers = [1, 2, 3];
-numbers.map(number => number * 2);
+const trim = str => str.trim();
+const wrapInDiv = str => `<div>${str}</div>`;
+const toLowerCase = str => str.toLowerCase();
 
-function greet(fn) {
-    console.log(fn());
-}
-
-function sayHello() {
-    return function() {
-        return "Hello World";
-    }
-}
+const result = wrapInDiv(toLowerCase(trim(input)));
+// trim
+// wrapInDiv
