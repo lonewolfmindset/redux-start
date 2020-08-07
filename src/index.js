@@ -1,11 +1,24 @@
-import { compose, pipe } from "lodash/fp";
+const person = { 
+    name: "John",
+    address: {
+        country: "USA",
+        city: "San Francisco"
+    } 
+};
 
-let input = "  JavaScript  ";
-let output = "<div>" + input.trim() + "</div>";
+const updated = {
+    ...person,
+    address: {
+        ...person.address,
+        city: "New York"
+    },
+    name: "Bob"
+};
+updated.address.city = "New York";
+console.log(person);
+console.log(updated);
 
-const trim = str => str.trim();
-const wrap = type => str => `<${type}>${str}</${type}>`
-const toLowerCase = str => str.toLowerCase();
-
-const transform = pipe(trim, toLowerCase, wrap("span"));
-console.log(transform(input));
+const spread = {...person, name: "Bobby"}; // SPREAD OPERATOR SYNTAX
+const objectAssign = Object.assign({}, person, { name: "Bob", age: 30 }); // OBJECT.ASSIGN
+console.log(spread);
+console.log(objectAssign);
