@@ -1,16 +1,12 @@
-const numbers = [1, 2, 3];
+import { Map } from 'immutable';
 
-// Adding
-const index = numbers.indexOf(2);
-const added = [
-    ...numbers.slice(0, index),
-    4,
-    ...numbers.slice(index)
-];
+let book = Map({title: "Harry Potter" });
 
-// Removing
-const removed = numbers.filter(n => n !== 2);
+function publish(book) {
+    return book.set("isPublished", true);
+}
 
-// Updating
-const updated = numbers.map(n => n === 2 ? 20 : n);
-console.log(updated);
+book = publish(book);
+
+console.log(book.get("title"));
+console.log(book.toJS());
