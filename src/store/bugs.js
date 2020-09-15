@@ -14,6 +14,7 @@ const slice = createSlice({
     bugsRequested: (bugs, action) => {
       bugs.loading = true;
     },
+
     bugsReceived: (bugs, action) => {
       bugs.list = action.payload;
       bugs.loading = false;
@@ -29,9 +30,14 @@ const slice = createSlice({
       const index = bugs.list.findIndex((bug) => bug.id === bugId);
       bugs.list[index].userId = userId;
     },
+
+    // command - event
+    // addBug - bugAdded
     bugAdded: (bugs, action) => {
       bugs.list.push(action.payload);
     },
+
+    // resolveBug (command) - bugResolved (event)
     bugResolved: (bugs, action) => {
       const index = bugs.list.findIndex((bug) => bug.id === action.payload.id);
       bugs.list[index].resolved = true;
@@ -75,6 +81,16 @@ export const addBug = (bug) =>
     method: "post",
     data: bug,
     onSuccess: bugAdded.type,
+  });
+
+export const resolveBug = (id) =>
+  apiRequest({
+    // /bugs
+    // PATCH /bugs/1
+    url: url + "/" + id,
+    method: "patch",
+    data: { resolved: true },
+    onSuccess: bugResolved.type,
   });
 
 // Selector
